@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>` | 亚哥 blog</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/logo.jpg">
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/assets/css/0.styles.35bcedcf.css" as="style"><link rel="preload" href="/assets/js/app.33da2419.js" as="script"><link rel="preload" href="/assets/js/2.0e8f82c3.js" as="script"><link rel="preload" href="/assets/js/8.e6fbe81c.js" as="script"><link rel="prefetch" href="/assets/js/10.5438148d.js"><link rel="prefetch" href="/assets/js/11.c8613338.js"><link rel="prefetch" href="/assets/js/12.e270abac.js"><link rel="prefetch" href="/assets/js/13.221c7e6b.js"><link rel="prefetch" href="/assets/js/14.17f693f4.js"><link rel="prefetch" href="/assets/js/15.e8081b1b.js"><link rel="prefetch" href="/assets/js/16.14fc9c04.js"><link rel="prefetch" href="/assets/js/3.e77e1804.js"><link rel="prefetch" href="/assets/js/4.0cd76920.js"><link rel="prefetch" href="/assets/js/5.af227e4b.js"><link rel="prefetch" href="/assets/js/6.809376cd.js"><link rel="prefetch" href="/assets/js/7.70e0e06e.js"><link rel="prefetch" href="/assets/js/9.01eeb297.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.35bcedcf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.JPG" alt="亚哥 blog" class="logo"> <span class="site-name can-hide">亚哥 blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/route-one/" class="nav-link">
+  iOS随笔
+</a></div><div class="nav-item"><a href="/route-two/" class="nav-link">
+  Java学习
+</a></div><div class="nav-item"><a href="/route-layabox/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  Laya Box开发
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/route-one/" class="nav-link">
+  iOS随笔
+</a></div><div class="nav-item"><a href="/route-two/" class="nav-link">
+  Java学习
+</a></div><div class="nav-item"><a href="/route-layabox/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  Laya Box开发
+</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id=""><a href="#" class="header-anchor">#</a></h2> <div class="language- extra-class"><pre class="language-text"><code>由于项目中想实现一个跑马灯的效果，先行查阅了论坛也没找到别人的实现。本人也是从零基础开始学习Layabox的刚入行菜鸟，由于不是专业的大Web前端开发（各位高手多多包涵）一些技术能力不够强，所以就决定自己实现一个跑马灯。
+
+设计思路就是类似一个自定义滚动组件，由滚动组件一点点自动将文字在屏幕上移动而过，自动化么。
+
+注意：因为跑马灯是不定时出现的，因此需要处理好他的创建和移除很重要，以防出现内存泄漏崩溃
+
+开始实现：
+
+    1、首先在Layabox画板里创建一个View场景，这个View场景是为了创建一个可复用的组件，方便我们使用的时候，直接拿来调用。
+
+    2、从组件里拖出一个Label组件 置于View的整个场景，因为这个暂时没有UI给效果图，全凭感觉，所以为了稍微有个背景，在View上放置一个带有颜色的全屏Label。
+
+    3、从组件里拖出Label，设置好跑马灯要显示的文字大小、颜色之类的宽度全屏等等，然后选中command+b组成Panel组件，这样基本上UI就做完了，他的层级结构如下：
+
+
+层级图
+接下来我们要显示到舞台上，在代码编辑区定义一个MarqueeView.ts文件。
+
+做一个可复用组件我们将需要轮播滚动的数据以string形式暴露出去，
+
+
+创建组件
+现在我们考虑一下怎么让文字滚动起来呢，文字滚动实质就是panel的水平滚动轴一点点移动：this.panel.hScrollBar.value++;
+
+滚动的区域这里把我难住了好半天，我单纯的设置this.panel.hScrollBar.value等于很大的值都没有效果，后来想了一下这类似于iOS中的ScrollView，它的偏移量是由Panel组件内部决定的，因为我改变Panel组件里的Label的宽度，就发现了奥妙，但是需要滚动多长呢，文字长度也不确切啊，（有知道怎么精确计算字符串宽度的老铁一起交流一下），数字、字母、特殊字符长度实在不知怎么精确计算，因此只能粗鲁处理，即一个字长度占20，所以Pannel内部组件的Label宽度为label.width = text.length * 20 +200；(200是我预估值，在我看来还比较合适，当然读者也可以自行调整)。
+
+
+跑马灯的核心1
+接下来就是倒计时的处理
+
+
+跑马灯核心2
+使用的时候外部直接调用 - showMarqueeView(&quot;欢迎大神入场&quot;)，就简易实现了一个跑马灯效果。至此跑马灯组件开发完毕，实现效果还是可以以假乱真的，如果有朋友知道Layabox是怎么真正的开发跑马灯组件，有兴趣的话可以一起探讨。
+</code></pre></div><blockquote><p>查看详情</p></blockquote> <h3 id="贴点代码"><a href="#贴点代码" class="header-anchor">#</a> 贴点代码</h3></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.33da2419.js" defer></script><script src="/assets/js/2.0e8f82c3.js" defer></script><script src="/assets/js/8.e6fbe81c.js" defer></script>
+  </body>
+</html>

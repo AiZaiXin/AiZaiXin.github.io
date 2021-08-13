@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring Boot | 亚哥 blog</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/logo.jpg">
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/assets/css/0.styles.35bcedcf.css" as="style"><link rel="preload" href="/assets/js/app.33da2419.js" as="script"><link rel="preload" href="/assets/js/2.0e8f82c3.js" as="script"><link rel="preload" href="/assets/js/15.e8081b1b.js" as="script"><link rel="prefetch" href="/assets/js/10.5438148d.js"><link rel="prefetch" href="/assets/js/11.c8613338.js"><link rel="prefetch" href="/assets/js/12.e270abac.js"><link rel="prefetch" href="/assets/js/13.221c7e6b.js"><link rel="prefetch" href="/assets/js/14.17f693f4.js"><link rel="prefetch" href="/assets/js/16.14fc9c04.js"><link rel="prefetch" href="/assets/js/3.e77e1804.js"><link rel="prefetch" href="/assets/js/4.0cd76920.js"><link rel="prefetch" href="/assets/js/5.af227e4b.js"><link rel="prefetch" href="/assets/js/6.809376cd.js"><link rel="prefetch" href="/assets/js/7.70e0e06e.js"><link rel="prefetch" href="/assets/js/8.e6fbe81c.js"><link rel="prefetch" href="/assets/js/9.01eeb297.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.35bcedcf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.JPG" alt="亚哥 blog" class="logo"> <span class="site-name can-hide">亚哥 blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/route-one/" class="nav-link">
+  iOS随笔
+</a></div><div class="nav-item"><a href="/route-two/" class="nav-link router-link-active">
+  Java学习
+</a></div><div class="nav-item"><a href="/route-layabox/" class="nav-link">
+  Laya Box开发
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/route-one/" class="nav-link">
+  iOS随笔
+</a></div><div class="nav-item"><a href="/route-two/" class="nav-link router-link-active">
+  Java学习
+</a></div><div class="nav-item"><a href="/route-layabox/" class="nav-link">
+  Laya Box开发
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>目录一</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/route-two/" aria-current="page" class="sidebar-link">Spring Boot</a></li><li><a href="/route-two/readme1.html" aria-current="page" class="active sidebar-link">Spring Boot</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/route-two/readme1.html#spring-boot" class="sidebar-link">Spring Boot</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/route-two/readme1.html#spring-boot配置绑定" class="sidebar-link">Spring Boot配置绑定</a></li><li class="sidebar-sub-header"><a href="/route-two/readme1.html#configurationproperties" class="sidebar-link">@ConfigurationProperties</a></li></ul></li><li class="sidebar-sub-header"><a href="/route-two/readme1.html#value" class="sidebar-link">@Value</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/route-two/readme1.html#value-与-configurationproperties-对比" class="sidebar-link">Value 与 @ConfigurationProperties 对比</a></li></ul></li></ul></li><li><a href="/route-two/readme2.html" class="sidebar-link">SpringBoot统一接口返回和全局异常处理</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="spring-boot"><a href="#spring-boot" class="header-anchor">#</a> Spring Boot</h2> <h3 id="spring-boot配置绑定"><a href="#spring-boot配置绑定" class="header-anchor">#</a> Spring Boot配置绑定</h3> <p>所谓“配置绑定”就是把配置文件中的值与 JavaBean 中对应的属性进行绑定。通常，我们会把一些配置信息（例如，数据库配置）放在配置文件中，然后通过 Java 代码去读取该配置文件，并且把配置文件中指定的配置封装到 JavaBean（实体类） 中。</p> <p>SpringBoot 提供了以下 2 种方式进行配置绑定：
+使用 @ConfigurationProperties 注解
+使用 @Value 注解</p> <h3 id="configurationproperties"><a href="#configurationproperties" class="header-anchor">#</a> @ConfigurationProperties</h3> <p>通过 Spring Boot 提供的 @ConfigurationProperties 注解，可以将全局配置文件中的配置数据绑定到 JavaBean 中。下面我们以 Spring Boot 项目 helloworld 为例，演示如何通过 @ConfigurationProperties 注解进行配置绑定。</p> <ol><li>在 helloworld 的全局配置文件 appilcation.yml 中添加以下自定义属性。</li></ol> <div class="language- extra-class"><pre class="language-text"><code>person:
+  lastName: 张三
+  age: 18
+  boss: false
+  birth: 1990/12/12
+  maps: { k1: v1, k2: 12}
+  list:
+    - 李四
+    - 阿萨德
+  dog:
+    name: 泰迪
+    age: 5
+</code></pre></div><ol start="2"><li>在 helloworld 项目的 com.aizaixin.bean 中创建一个名为 Person 的实体类，并将配置文件中的属性映射到这个实体类上，代码如下。</li></ol> <div class="language- extra-class"><pre class="language-text"><code>/**
+* 将配置文件中配置的每一个属性的值，映射到这个组件中
+*
+* @ConfigurationProperties：告诉 SpringBoot 将本类中的所有属性和配置文件中相关的配置进行绑定；
+* prefix = &quot;person&quot;：配置文件中哪个下面的所有属性进行一一映射
+*
+* 只有这个组件是容器中的组件，才能使用容器提供的@ConfigurationProperties功能；
+*/
+@Data
+@Component
+@ConfigurationProperties(prefix = &quot;person&quot;)
+public class Person {
+    private String lastName;
+    private Integer age;
+    private Boolean boss;
+    private Date birth;
+    private Map&lt;String, Object&gt; maps;
+    private List&lt;Object&gt; lists;
+    private Dog dog;
+}
+
+</code></pre></div><p>注意：
+只有在容器中的组件，才会拥有 SpringBoot 提供的强大功能。如果我们想要使用 @ConfigurationProperties 注解进行配置绑定，那么首先就要保证该对 JavaBean 对象在 IoC 容器中，所以需要用到 @Component 注解来添加组件到容器中。
+JavaBean 上使用了注解 @ConfigurationProperties(prefix = &quot;person&quot;) ，它表示将这个 JavaBean 中的所有属性与配置文件中以“person”为前缀的配置进行绑定。
+3. 在 com.aizaixin.bean 中，创建一个名为 Dog 的 JavaBean，代码如下。</p> <div class="language- extra-class"><pre class="language-text"><code>@Data
+public class Dog {
+    private String name;
+    private String age;
+}
+
+</code></pre></div><ol start="4"><li>修改 HelloController 的代码，在浏览器中展示配置文件中各个属性值，代码如下。</li></ol> <div class="language- extra-class"><pre class="language-text"><code>@Controller
+public class HelloController {
+
+    @Autowired
+    private Person person;
+
+    @RequestMapping(&quot;/hello&quot;)
+    @ResponseBody
+    public Person hello () {
+        return person;
+    }
+}
+</code></pre></div><ol start="5"><li>重启项目，使用浏览器访问 “http://localhost:8081/hello”，结果如下图。</li></ol> <div class="language- extra-class"><pre class="language-text"><code>{&quot;lastName&quot;:&quot;张三&quot;,&quot;age&quot;:18,&quot;boss&quot;:false,&quot;birth&quot;:&quot;1990-12-11T16:00:00.000+0000&quot;,&quot;maps&quot;:{&quot;k1&quot;:&quot;v1&quot;,&quot;k2&quot;:12},&quot;lists&quot;:null,&quot;dog&quot;:{&quot;name&quot;:&quot;泰迪&quot;,&quot;age&quot;:&quot;5&quot;}}
+</code></pre></div><h2 id="value"><a href="#value" class="header-anchor">#</a> @Value</h2> <p>当我们只需要读取配置文件中的某一个配置时，可以通过 @Value 注解获取</p> <ol><li>以 Spring Boot 项目 helloworld 为例，修改实体类 Person 中的代码，使用 @Value 注解进行配置绑定，代码如下。</li></ol> <div class="language- extra-class"><pre class="language-text"><code>@Data
+@Component
+//@ConfigurationProperties(prefix = &quot;person&quot;)
+public class Person {
+    @Value(&quot;${person.lastName}&quot;)
+    private String lastName;
+    @Value(&quot;${person.age}&quot;)
+    private Integer age;
+    @Value(&quot;${person.boss}&quot;)
+    private Boolean boss;
+    @Value(&quot;${person.birth}&quot;)
+    private Date birth;
+
+    private Map&lt;String, Object&gt; maps;
+    private List&lt;Object&gt; lists;
+    private Dog dog;
+}
+</code></pre></div><ol start="2"><li>重启项目，使用浏览器访问 “http://localhost:8081/hello”，结果如下图。</li></ol> <div class="language- extra-class"><pre class="language-text"><code>{&quot;lastName&quot;:&quot;张三&quot;,&quot;age&quot;:18,&quot;boss&quot;:false,&quot;birth&quot;:&quot;1990-12-11T16:00:00.000+0000&quot;,&quot;maps&quot;:null,&quot;lists&quot;:null,&quot;dog&quot;:null}
+</code></pre></div><h3 id="value-与-configurationproperties-对比"><a href="#value-与-configurationproperties-对比" class="header-anchor">#</a> Value 与 @ConfigurationProperties 对比</h3> <p>@Value 和 @ConfigurationProperties 注解都能读取配置文件中的属性值并绑定到 JavaBean 中，但两者存在以下不同。</p> <ol><li>使用位置不同</li></ol> <p>@ConfigurationProperties：标注在 JavaBean 的类名上；
+@Value：标注在 JavaBean 的属性上。
+2. 功能不同</p> <p>@ConfigurationProperties：用于批量绑定配置文件中的配置；
+@Value：只能一个一个的指定需要绑定的配置。
+3. 松散绑定支持不同</p> <p>@ConfigurationProperties：支持松散绑定（松散语法），例如实体类 Person 中有一个属性为 lastName，那么配置文件中的属性名支持以下写法：
+person.firstName
+person.first-name
+person.first_name
+PERSON_FIRST_NAME</p> <p>@Vaule：不支持松散绑定。
+4. SpEL 支持不同</p> <p>@ConfigurationProperties：不支持 SpEL 表达式;
+@Value：支持 SpEL 表达式。
+5. 复杂类型封装</p> <p>@ConfigurationProperties：支持所有类型数据的封装，例如 Map、List、Set、以及对象等；
+@Value：只支持基本数据类型的封装，例如字符串、布尔值、整数等类型。
+6. 应用场景不同</p> <p>@Value 和 @ConfigurationProperties 两个注解之间，并没有明显的优劣之分，它们只是适合的应用场景不同而已。
+若只是获取配置文件中的某项值，则推荐使用 @Value 注解；
+若专门编写了一个 JavaBean 来和配置文件进行映射，则建议使用 @ConfigurationProperties 注解。</p> <p>我们在选用时，根据实际应用场景选择合适的注解能达到事半功倍的效果。</p> <blockquote><p>引用部分</p></blockquote></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/route-two/" class="prev router-link-active">
+        Spring Boot
+      </a></span> <span class="next"><a href="/route-two/readme2.html">
+        SpringBoot统一接口返回和全局异常处理
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.33da2419.js" defer></script><script src="/assets/js/2.0e8f82c3.js" defer></script><script src="/assets/js/15.e8081b1b.js" defer></script>
+  </body>
+</html>

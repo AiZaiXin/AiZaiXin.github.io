@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SpringBoot统一接口返回和全局异常处理 | 亚哥 blog</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/logo.jpg">
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/assets/css/0.styles.35bcedcf.css" as="style"><link rel="preload" href="/assets/js/app.33da2419.js" as="script"><link rel="preload" href="/assets/js/2.0e8f82c3.js" as="script"><link rel="preload" href="/assets/js/16.14fc9c04.js" as="script"><link rel="prefetch" href="/assets/js/10.5438148d.js"><link rel="prefetch" href="/assets/js/11.c8613338.js"><link rel="prefetch" href="/assets/js/12.e270abac.js"><link rel="prefetch" href="/assets/js/13.221c7e6b.js"><link rel="prefetch" href="/assets/js/14.17f693f4.js"><link rel="prefetch" href="/assets/js/15.e8081b1b.js"><link rel="prefetch" href="/assets/js/3.e77e1804.js"><link rel="prefetch" href="/assets/js/4.0cd76920.js"><link rel="prefetch" href="/assets/js/5.af227e4b.js"><link rel="prefetch" href="/assets/js/6.809376cd.js"><link rel="prefetch" href="/assets/js/7.70e0e06e.js"><link rel="prefetch" href="/assets/js/8.e6fbe81c.js"><link rel="prefetch" href="/assets/js/9.01eeb297.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.35bcedcf.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.JPG" alt="亚哥 blog" class="logo"> <span class="site-name can-hide">亚哥 blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/route-one/" class="nav-link">
+  iOS随笔
+</a></div><div class="nav-item"><a href="/route-two/" class="nav-link router-link-active">
+  Java学习
+</a></div><div class="nav-item"><a href="/route-layabox/" class="nav-link">
+  Laya Box开发
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/route-one/" class="nav-link">
+  iOS随笔
+</a></div><div class="nav-item"><a href="/route-two/" class="nav-link router-link-active">
+  Java学习
+</a></div><div class="nav-item"><a href="/route-layabox/" class="nav-link">
+  Laya Box开发
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>目录一</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/route-two/" aria-current="page" class="sidebar-link">Spring Boot</a></li><li><a href="/route-two/readme1.html" class="sidebar-link">Spring Boot</a></li><li><a href="/route-two/readme2.html" aria-current="page" class="active sidebar-link">SpringBoot统一接口返回和全局异常处理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/route-two/readme2.html#springboot不使用统一返回格式" class="sidebar-link">SpringBoot不使用统一返回格式</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/route-two/readme2.html#基础用法" class="sidebar-link">基础用法</a></li></ul></li><li class="sidebar-sub-header"><a href="/route-two/readme2.html#_2-2" class="sidebar-link">2.2</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="springboot统一接口返回和全局异常处理"><a href="#springboot统一接口返回和全局异常处理" class="header-anchor">#</a> SpringBoot统一接口返回和全局异常处理</h1> <div class="language- extra-class"><pre><code>现在大多数公司项目框架，基本都是属于前后端分离模式，这种模式会涉及到一个前后端对接问题，无论是对前端或者是后台服务，维护一套完善且规范的接口是非常有必要的，这样不仅能够提高对接效率，也可以让我的代码看起来更加简洁优雅。
+修改前后最大的区别是我们不用在每个接口单独捕获异常，也不用在每个接口都要组装一遍返回参数
+</code></pre></div><h2 id="springboot不使用统一返回格式"><a href="#springboot不使用统一返回格式" class="header-anchor">#</a> SpringBoot不使用统一返回格式</h2> <div class="language- extra-class"><pre><code>默认情况下，SpringBoot会有如下三种返回情况。
+1、字符串
+```
+@GetMapping(&quot;/getUserName&quot;)
+public String getUserName(){
+    return &quot;asd&quot;;
+}
+```
+2、实体类
+```
+@GetMapping(&quot;/getUserName&quot;)
+public User getUserName(){
+    return new User(&quot;asd&quot;,18,&quot;男&quot;);
+}
+```
+3、异常返回
+```
+@GetMapping(&quot;/getUserName&quot;)
+public static String getUserName(){
+    HashMap hashMap = Maps.newHashMap();
+    return hashMap.get(0).toString();
+}
+```
+</code></pre></div><h3 id="基础用法"><a href="#基础用法" class="header-anchor">#</a> 基础用法</h3> <div class="language- extra-class"><pre><code>项目中最常见到的是封装一个工具类，类中定义需要返回的字段信息，把需要返回前端的接口信息，通过该类进行封装，这样就可以解决返回格式不统一的现象了。
+1、定义参数
+    code： 状态码，后台可以维护一套统一的状态码；
+    message： 描述信息，接口调用成功/失败的提示信息；
+    data： 返回数据。
+2、代码实现
+    ```
+    public class Result&lt;T&gt; {
+        private int code;
+        private String message;
+        private T data;
+        public Result() {}
+        public Result(int code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+        /**
+         * 成功
+         */
+        public static &lt;T&gt; Result&lt;T&gt; success(T data) {
+            Result&lt;T&gt; result = new Result&lt;T&gt;();
+            result.setCode(ResultMsgEnum.SUCCESS.getCode());
+            result.setMessage(ResultMsgEnum.SUCCESS.getMessage());
+            result.setData(data);
+            return result;
+        }
+        /**
+         * 失败
+         */
+        public static &lt;T&gt; Result&lt;T&gt; error(int code, String message) {
+            return new Result(code, message);
+        }
+    }
+    ```
+    定义返回状态码
+    ```
+    public enum ResultMsgEnum {
+        SUCCESS(0, &quot;成功&quot;),
+        FAIL(-1, &quot;失败&quot;),
+        AUTH_ERROR(502, &quot;授权失败!&quot;),
+        SERVER_BUSY(503, &quot;服务器正忙，请稍后再试!&quot;),
+        DATABASE_OPERATION_FAILED(504, &quot;数据库操作失败&quot;);
+        private int code;
+        private String message;
+    ​
+        ResultMsgEnum(int code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+        public int getCode() {
+            return this.code;
+        }
+        
+        public String getMessage() {
+            return this.message;
+        }
+    }
+    ```
+    使用
+    ```
+    @GetMapping(&quot;/getUserName&quot;)
+    public Result getUserName(){
+        return Result.success(&quot;huage&quot;);
+    }
+    ```
+    调用结果如下，可以看到是我们在Result中定义的参数类型
+    ```
+    {
+        &quot;code&quot;: 0,
+        &quot;message&quot;: &quot;成功&quot;,
+        &quot;data&quot;: &quot;huage&quot;
+    }
+    ```
+</code></pre></div><h2 id="_2-2"><a href="#_2-2" class="header-anchor">#</a> 2.2</h2> <blockquote><p>引用部分</p></blockquote></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/route-two/readme1.html" class="prev">
+        Spring Boot
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.33da2419.js" defer></script><script src="/assets/js/2.0e8f82c3.js" defer></script><script src="/assets/js/16.14fc9c04.js" defer></script>
+  </body>
+</html>
